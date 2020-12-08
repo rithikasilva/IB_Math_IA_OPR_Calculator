@@ -1,0 +1,23 @@
+for x in range(68):
+    for x in range(3):
+        for x in range(total_teams):
+            if team_numbers.iloc[0 , team_list_iteration] == match_data.iloc[match_data_row_iteration, match_data_column_iteration_blue]:
+                teams_matrix[teams_matrix_row_iteration , teams_matrix_column_iteration] = 1
+                teams_matrix_column_iteration = teams_matrix_column_iteration + 1
+                team_list_iteration = team_list_iteration + 1
+
+
+            else:
+                teams_matrix_column_iteration = teams_matrix_column_iteration + 1
+                team_list_iteration = team_list_iteration + 1
+        team_list_iteration = 0
+        teams_matrix_column_iteration = 0
+        match_data_column_iteration_blue = match_data_column_iteration_blue + 1
+
+
+
+    team_list_iteration = 0
+    teams_matrix_column_iteration = 0
+    teams_matrix_row_iteration = teams_matrix_row_iteration + 1
+    match_data_column_iteration_blue = 1
+    match_data_row_iteration = match_data_row_iteration + 1
