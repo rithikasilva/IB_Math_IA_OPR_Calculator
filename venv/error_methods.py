@@ -12,6 +12,9 @@ import find_teams_data
 import calculate_opr_matrix
 import error_methods
 
+
+#testing testing can this be seen?
+
 #Defines variables from creat_matrices file
 match_data = create_matrices.match_data
 team_numbers = create_matrices.team_numbers
