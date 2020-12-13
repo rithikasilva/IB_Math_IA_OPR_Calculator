@@ -31,7 +31,8 @@ while(ans):
     print("4. Print Smallest Error")
     print("5. Print Average Error Per Match")
     print("6. Time to calculate opr matrix")
-    print("7. Exit")
+    print("7. Graph")
+    print("8. Exit")
 
     choice = input("Please select a choice:")
 
@@ -44,7 +45,7 @@ while(ans):
             print("Please input only team numbers of teams who competed in the events")
 
     # Calculate the OPR of three team
-    if choice == '2':
+    elif choice == '2':
         try:
             first_team_choice = input("Please input the first team number:")
             second_team_choice = input("Please input the second team number:")
@@ -53,19 +54,21 @@ while(ans):
         except:
             print("Please input only team numbers of teams who competed in the events")
     #Calculate the largest error produced with reference event
-    if choice == '3':
+    elif choice == '3':
         error_methods.printLargestError()
     #Calculate the smallest error produced with reference event
-    if choice == '4':
+    elif choice == '4':
         error_methods.printSmallestError()
     #Calculate the average error produced with reference event
-    if choice == '5':
+    elif choice == '5':
         error_methods.printAvgErrorPerMatch()
     #Display the time taken to calculate OPR (specifically to create the OPR matrix)
-    if choice == '6':
+    elif choice == '6':
         print(calculate_opr_matrix.time_to_calculate)
+    elif choice == '7':
+        error_methods.graphError()
     #Exit from menu
-    if choice == '7':
+    elif choice == '8':
         ans = False
     else:
         print("IN VALID INPUT")

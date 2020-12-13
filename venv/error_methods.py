@@ -12,6 +12,8 @@ import find_teams_data
 import calculate_opr_matrix
 import error_methods
 
+import matplotlib.pyplot as plt
+
 
 #________________________________________________________________
 
@@ -27,7 +29,8 @@ score_matrix = create_matrices.score_matrix
 
 match_data_for_error_reference = create_matrices.match_data_for_error_reference
 
-
+error_graph_array_y = np.zeros(2 * len(match_data_for_error_reference.index))
+error_graph_array_x = np.zeros(2 * len(match_data_for_error_reference.index))
 
 def printAvgErrorPerMatch():
     error_sum = 0
@@ -41,6 +44,26 @@ def printAvgErrorPerMatch():
         colour_score_position = 8
     total_scores = 2 * len(match_data_for_error_reference.index)
     print(error_sum/total_scores)
+
+def graphError():
+    total_number_of_matches = len(match_data_for_error_reference.index)
+    color_positions = 1
+    colour_score_position = 7
+    error_graph_array_counter = 0
+    for x in range(2):
+        for a in range(total_number_of_matches):
+            error_graph_array_y[error_graph_array_counter] = find_teams_data.findOPR(
+                match_data_for_error_reference.iloc[a, color_positions]) + find_teams_data.findOPR(
+                match_data_for_error_reference.iloc[a, color_positions + 1]) + find_teams_data.findOPR(
+                match_data_for_error_reference.iloc[a, color_positions + 2]) - match_data_for_error_reference.iloc[
+                            a, colour_score_position]
+            error_graph_array_x[error_graph_array_counter] = error_graph_array_counter
+            error_graph_array_counter = error_graph_array_counter + 1
+        color_positions = 4
+        colour_score_position = 8
+    #plt.plot(error_graph_array_x,error_graph_array_y)
+    plt.hist(error_graph_array_y, bins=30)
+    plt.show()
 
 
 def printLargestError():
