@@ -6,6 +6,9 @@ import scipy
 import scipy.linalg
 import pandas as pd
 import time
+from scipy import stats
+from scipy.stats import norm
+
 
 import create_matrices
 import find_teams_data
@@ -62,7 +65,31 @@ def graphError():
         color_positions = 4
         colour_score_position = 8
     #plt.plot(error_graph_array_x,error_graph_array_y)
-    plt.hist(error_graph_array_y, bins=30)
+
+    #plt.ylim(0, 100)
+
+    # Fit a normal distribution to the data:
+    mu, std = norm.fit(error_graph_array_y)
+
+    # Plot the histogram.
+    plt.hist(error_graph_array_y, bins=14,density=True)
+
+
+
+
+
+    plt.xticks()
+    # Plot the PDF.
+    xmin, xmax = plt.xlim()
+    x = np.linspace(xmin, xmax, 100)
+    p = norm.pdf(x, mu, std)
+    plt.plot(x, p, 'k', linewidth=2)
+    title = "Fit results: mu = %.2f,  std = %.2f" % (mu, std)
+    plt.title(title)
+
+
+
+
     plt.show()
 
 
