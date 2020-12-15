@@ -66,7 +66,7 @@ while(ans):
     elif choice == '6':
         print(calculate_opr_matrix.time_to_calculate)
     elif choice == '7':
-        error_methods.graphError()
+        error_methods.graphErrorRough()
     #Exit from menu
     elif choice == '8':
         ans = False

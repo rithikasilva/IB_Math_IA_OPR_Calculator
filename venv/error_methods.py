@@ -8,6 +8,7 @@ import pandas as pd
 import time
 from scipy import stats
 from scipy.stats import norm
+from matplotlib.ticker import FormatStrFormatter
 
 
 import create_matrices
@@ -72,13 +73,11 @@ def graphError():
     mu, std = norm.fit(error_graph_array_y)
 
     # Plot the histogram.
+
+
     plt.hist(error_graph_array_y, bins=14,density=True)
 
 
-
-
-
-    plt.xticks()
     # Plot the PDF.
     xmin, xmax = plt.xlim()
     x = np.linspace(xmin, xmax, 100)
@@ -125,3 +124,92 @@ def printSmallestError():
     print(smallest_error)
 
 
+
+
+
+
+
+
+
+
+
+def graphErrorRough():
+    total_number_of_matches = len(match_data_for_error_reference.index)
+    color_positions = 1
+    colour_score_position = 7
+    error_graph_array_counter = 0
+    for x in range(2):
+        for a in range(total_number_of_matches):
+            error_graph_array_y[error_graph_array_counter] = find_teams_data.findOPR(
+                match_data_for_error_reference.iloc[a, color_positions]) + find_teams_data.findOPR(
+                match_data_for_error_reference.iloc[a, color_positions + 1]) + find_teams_data.findOPR(
+                match_data_for_error_reference.iloc[a, color_positions + 2]) - match_data_for_error_reference.iloc[
+                            a, colour_score_position]
+            error_graph_array_x[error_graph_array_counter] = error_graph_array_counter
+            error_graph_array_counter = error_graph_array_counter + 1
+        color_positions = 4
+        colour_score_position = 8
+
+
+
+    fig, ax = plt.subplots()
+    counts, bins, patches = ax.hist(error_graph_array_y, bins=14, facecolor='yellow', edgecolor='gray')
+
+    # Set the ticks to be at the edges of the bins.
+    ax.set_xticks(bins)
+    # Set the xaxis's tick labels to be formatted with 1 decimal place...
+    ax.xaxis.set_major_formatter(FormatStrFormatter('%0.0f'))
+
+    # Change the colors of bars at the edges...
+    #twentyfifth, seventyfifth = np.percentile(error_graph_array_y, [25, 75])
+    #for patch, rightside, leftside in zip(patches, bins[1:], bins[:-1]):
+        #if rightside < twentyfifth:
+            #patch.set_facecolor('green')
+        #elif leftside > seventyfifth:
+            #patch.set_facecolor('red')
+
+    # Label the raw counts and the percentages below the x-axis...
+    bin_centers = 0.5 * np.diff(bins) + bins[:-1]
+    for count, x in zip(counts, bin_centers):
+        # Label the raw counts
+        ax.annotate(str(int(count)), xy=(x, 0), xycoords=('data', 'axes fraction'),
+                    xytext=(0, -18), textcoords='offset points', va='top', ha='center')
+
+        # Label the percentages
+        #percent = '%0.0f%%' % (100 * float(count) / counts.sum())
+        #ax.annotate(percent, xy=(x, 0), xycoords=('data', 'axes fraction'),
+                    #xytext=(0, -32), textcoords='offset points', va='top', ha='center')
+
+
+
+
+    # Give ourselves some more room at the bottom of the plot
+    plt.subplots_adjust(bottom=0.15)
+    ax.set_ylabel('Number In Bin')
+
+
+    # Fit a normal distribution to the data:
+
+
+
+
+    mu, std = norm.fit(error_graph_array_y)
+    # Plot the PDF.
+    xmin, xmax = plt.xlim()
+    x = np.linspace(xmin, xmax, 100)
+    p = norm.pdf(x, mu, std)
+
+    ax2 = ax.twinx()
+    color = 'tab:blue'
+    ax2.set_ylabel('Normal Distribution Scale', color=color)  # we already handled the x-label with ax1
+    ax2.plot(x, p, 'k', linewidth=2)
+    ax2.tick_params(axis='y', labelcolor=color)
+    ax2.set_ylim(bottom=0)
+    fig.tight_layout(pad=2)  # otherwise the right y-label is slightly clipped
+
+    title = "Fit results: mu = %.2f,  std = %.2f" % (mu, std)
+    plt.title(title)
+
+
+
+    plt.show()
