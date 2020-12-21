@@ -17,3 +17,5 @@ teams_matrix_transpose = create_matrices.teams_matrix.transpose()
 opr_matrix = np.dot(np.dot(np.linalg.pinv(np.dot(teams_matrix_transpose, create_matrices.teams_matrix))
                            , teams_matrix_transpose), create_matrices.score_matrix)
 time_to_calculate = time.time()- start_time
+
+

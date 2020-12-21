@@ -17,7 +17,7 @@ match_data_for_error_reference = pd.read_csv("PROV CHAMP/2019oncmp_combined_matc
 
 total_scores = len(match_data)*2 #this is because two alliances are playing per match
 total_matches = len(match_data)
-total_teams= len(team_numbers.columns) #gathers total teams from teams csv
+total_teams = len(team_numbers.columns) #gathers total teams from teams csv
 
 
 teams_matrix = np.zeros((total_scores, total_teams)) #Generates empty matrix with total_scores x total teams dimensions
@@ -72,6 +72,7 @@ def populateTeamsMatrix():
 
         match_data_colour_check_is_red = False
         match_data_row_counter = 0
+
 
 
 

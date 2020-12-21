@@ -12,7 +12,7 @@ import create_matrices
 import find_teams_data
 import calculate_opr_matrix
 import error_methods
-
+import create_OPR_csv
 
 
 
@@ -32,7 +32,8 @@ while(ans):
     print("5. Print Average Error Per Match")
     print("6. Time to calculate opr matrix")
     print("7. Graph")
-    print("8. Exit")
+    print("8. Send OPR data to csv")
+    print("9. Exit")
 
     choice = input("Please select a choice:")
 
@@ -67,8 +68,11 @@ while(ans):
         print(calculate_opr_matrix.time_to_calculate)
     elif choice == '7':
         error_methods.graphErrorRough()
-    #Exit from menu
+    #Create csv with OPR Data
     elif choice == '8':
+        create_OPR_csv.sendOPRtoCsv()
+    #Exit from menu
+    elif choice == '9':
         ans = False
     else:
         print("IN VALID INPUT")
