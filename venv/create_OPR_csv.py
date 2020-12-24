@@ -18,7 +18,7 @@ def send_opr_to_csv():
     # For loop that iterates through the number of total teams
     for y in range(create_matrices.total_teams):
         # Records opr into opr_data_for_csv array
-        opr_data_for_csv[y, 1] = str(round(find_teams_data.findOPR(create_matrices.team_numbers.iloc[0, y]), 2))
+        opr_data_for_csv[y, 1] = str(round(find_teams_data.find_opr(create_matrices.team_numbers.iloc[0, y]), 2))
 
     # Create new pandas DataFrame  with opr_data_for_csv array data with 'Team Number' and 'Offensive Power Rating'
     # as column titles

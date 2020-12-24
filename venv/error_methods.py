@@ -176,11 +176,11 @@ def graph_error():
             #patch.set_facecolor('red')
 
     # Label the raw counts below the x-axis...
-    bin_centers = 0.5 * np.diff(bins) + bins[:-1]
-    for count, x in zip(counts, bin_centers):
+    # bin_centers = 0.5 * np.diff(bins) + bins[:-1]
+    # for count, x in zip(counts, bin_centers):
         # Label the raw counts
-        ax.annotate(str(int(count)), xy=(x, 0), xycoords=('data', 'axes fraction'),
-                    xytext=(0, -18), textcoords='offset points', va='top', ha='center')
+        # ax.annotate(str(int(count)), xy=(x, 0), xycoords=('data', 'axes fraction'),
+                    # xytext=(0, -18), textcoords='offset points', va='top', ha='center')
 
         # Label the percentages
         #percent = '%0.0f%%' % (100 * float(count) / counts.sum())
@@ -194,7 +194,10 @@ def graph_error():
     plt.subplots_adjust(bottom=0.15)
     # Set y label as 'Number In Bin'
     ax.set_ylabel('Number In Bin')
-
+    # Label the x axis
+    ax.set_xlabel("Error From Predicted Score and Real Score")
+    # Set number of y axis ticks for histogram
+    ax.locator_params(axis="y", nbins=10)
     # Fit a normal distribution to the data
     # Initialize mu as mean and std as standard deviation
     mu, std = norm.fit(error_graph_array_y)
@@ -210,7 +213,7 @@ def graph_error():
     # Create y label for ax2 called 'Normal Distribution Scale' and colour blue
     ax2.set_ylabel('Normal Distribution Scale', color='tab:blue')
     # Plot normal distribution on ax2
-    ax2.plot(x, p, 'k', linewidth=2)
+    ax2.plot(x, p, 'k', linewidth=2, color='tab:blue')
     # Set the ticks on ax2 y axis as blue
     ax2.tick_params(axis='y', labelcolor='tab:blue')
     # Set ax2 bottom limit as 0
@@ -218,8 +221,12 @@ def graph_error():
     # Set the graph to a tight layout, so the y-label of ax2 is not clipped
     fig.tight_layout(pad=2)
     # Temporary title for chart with mean and standard deviation
-    title = "Fit results: mu = %.2f,  std = %.2f" % (mu, std)
+    #title = "Fit results: mu = %.2f,  std = %.2f" % (mu, std)
+    # New Title
+    title = "Histogram of Error Per Match Over Gaussian Distribution"
     plt.title(title)
 
     # Plot the graph
     plt.show()
+    print(mu)
+    print(std)
