@@ -8,11 +8,11 @@ import time
 
 
 # Create a pandas DataFrame with match data
-match_data = pd.read_csv("OPR 2019 Ontario/Matches/combined_matches.csv", header=None)
+match_data = pd.read_csv("ontario_combined_matches.csv", header=None)
 # Create a pandas DataFrame with team involved in event
-team_numbers = pd.read_csv("OPR 2019 Ontario/Teams/combined_teams.csv", header=None)
+team_numbers = pd.read_csv("ontario_combined_teams.csv", header=None)
 # Create a pandas DataFrame with data from 2019 provincial championship matches
-match_data_for_error_reference = pd.read_csv("PROV CHAMP/2019oncmp_combined_matches.csv", header=None)
+match_data_for_error_reference = pd.read_csv("2019_ontario_championship_combined_matches.csv", header=None)
 
 # total_scores is initialized as two times the length of match-data as there are two alliances in each match
 total_scores = len(match_data)*2
