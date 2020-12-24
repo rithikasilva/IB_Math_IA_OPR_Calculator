@@ -23,7 +23,7 @@ def send_opr_to_csv():
     # Create new pandas DataFrame  with opr_data_for_csv array data with 'Team Number' and 'Offensive Power Rating'
     # as column titles
     df = pd.DataFrame(opr_data_for_csv, columns=['Team Number', 'Offensive Power Rating'])
-    # Create csv file called 'OPR_DATA.csv' with df as data
-    df.to_csv('OPR_DATA.csv')
+    # Create csv file called 'opr_data.csv' with df as data
+    df.to_csv('csv_data/opr_data.csv')
 
 
